@@ -59,6 +59,7 @@ import com.huawei.openstack4j.openstack.message.notification.internal.Notificati
 import com.huawei.openstack4j.openstack.message.queue.internal.MessageQueueService;
 import com.huawei.openstack4j.openstack.tms.v1.internal.TagManagementService;
 import com.huawei.openstack4j.openstack.trove.internal.TroveService;
+import com.huawei.openstack4j.openstack.vpc.v1.internal.VpcServices;
 import com.huawei.openstack4j.openstack.vpc.v2.internal.VirtualPrivateCloudService;
 
 /**
@@ -346,9 +347,9 @@ public interface OSClient<T extends OSClient<T>> {
 
 		public OSClientV3  withProjectId(String projectId);
 		
-		public  OSClientV3  withToken(String tokenId);		
-
-
+		public  OSClientV3  withToken(String tokenId);
+		
+		
 	}
 
 	/**
@@ -526,7 +527,7 @@ public interface OSClient<T extends OSClient<T>> {
 	  * Returns the VirtualPrivateCloud Service API
 	  * @return the VirtualPrivateCloudService
 	  */
-	 com.huawei.openstack4j.openstack.vpc.v1.internal.VirtualPrivateCloudService vpc();
+	 VpcServices vpc();
 	 
 	 
 	 /**

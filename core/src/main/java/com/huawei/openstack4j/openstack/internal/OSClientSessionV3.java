@@ -53,6 +53,7 @@ import com.huawei.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 import com.huawei.openstack4j.openstack.maas.internal.MaaSService;
 import com.huawei.openstack4j.openstack.message.notification.internal.NotificationService;
 import com.huawei.openstack4j.openstack.message.queue.internal.MessageQueueService;
+import com.huawei.openstack4j.openstack.vpc.v1.internal.VpcServices;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -343,5 +344,9 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 	@Override
 	public CdnServices cdn() {
 		return Apis.get(CdnServices.class);
+	}
+	
+	public VpcServices vpc() {
+		return Apis.get(VpcServices.class);
 	}
 }

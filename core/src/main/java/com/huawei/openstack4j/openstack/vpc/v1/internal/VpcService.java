@@ -20,32 +20,33 @@ import java.util.Map;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.huawei.openstack4j.openstack.vpc.v1.domain.BandWidth;
-import com.huawei.openstack4j.openstack.vpc.v1.domain.BandWidth.Bandwidths;
-
+import com.huawei.openstack4j.model.common.ActionResponse;
+import com.huawei.openstack4j.openstack.vpc.v1.domain.Vpc;
+import com.huawei.openstack4j.openstack.vpc.v1.domain.VpcCreate;
+import com.huawei.openstack4j.openstack.vpc.v1.domain.Vpc.Vpcs;
 /**
- * The implementation of manipulation of Bandwidth
+ * The implementation of manipulation of Vpc
  * 
  * @author ChangjunZhao
  * @date   2018-03-25
  */
-public class BandWidthService extends BaseVpcServices{
-
+public class VpcService extends BaseVpcServices{
+	
 	/**
-	 * Querying Bandwidths
-	 * @return Bandwidth List
+	 * Querying VPCs
+	 * @return
 	 */
-	public List<? extends BandWidth> list(){
+	public List<? extends Vpc> list(){
 		return list(null);
 	}
 	
 	/**
-	 * Querying Bandwidths with filter
+	 * Querying VPCs with filter
 	 * @param filteringParams
 	 * @return
 	 */
-	public List<? extends BandWidth> list(Map<String, String> filteringParams) {
-		Invocation<Bandwidths> flavorInvocation = get(Bandwidths.class, uri("/bandwidths"));
+	public List<? extends Vpc> list(Map<String, String> filteringParams) {
+		Invocation<Vpcs> flavorInvocation = get(Vpcs.class, uri("/vpcs"));
 		if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
             	flavorInvocation = flavorInvocation.param(entry.getKey(), entry.getValue());
@@ -56,23 +57,45 @@ public class BandWidthService extends BaseVpcServices{
 	}
 	
 	/**
-	 * Querying Bandwidth Details
-	 * @param bandwidthId
-	 * @return Bandwidth
+	 * Creating a VPC
+	 * @param creation
+	 * @return
 	 */
-	public BandWidth get(String bandwidthId){
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(bandwidthId), "parameter `bandwidthId` should not be empty");
-		return get(BandWidth.class, uri("/bandwidths/%s",bandwidthId)).execute();
+	public Vpc create(VpcCreate creation){
+		Preconditions.checkNotNull(creation, "parameter `creation` should not be null");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getName()),
+				"parameter `creation.name` should not be empty");
+		Preconditions.checkNotNull(creation.getCidr(), "parameter `creation.cidr` should not be empty");
+		return post(Vpc.class, uri("/vpcs")).entity(creation).execute();
 	}
 	
 	/**
-	 * Updating Bandwidth
-	 * @param bandwidth
-	 * @return bandwidth
+	 * Querying VPC Details
+	 * @param vpcId
+	 * @return
 	 */
-	public BandWidth update(BandWidth bandwidth){
-		Preconditions.checkNotNull(bandwidth, "parameter `bandwidth` should not be null");
-		return put(BandWidth.class, uri("/bandwidths/%s",bandwidth.getId())).entity(bandwidth).execute();
+	public Vpc get(String vpcId){
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(vpcId), "parameter `vpcId` should not be empty");
+		return get(Vpc.class, uri("/vpcs/%s",vpcId)).execute();
+	}
+	
+	/**
+	 * Updating VPC Information
+	 * @param vpc
+	 * @return
+	 */
+	public Vpc update(Vpc vpc){
+		return put(Vpc.class, uri("/vpcs/%s",vpc.getId())).entity(vpc).execute();
+	}
+	
+	/**
+	 * Deleting a VPC
+	 * @param vpcId
+	 * @return
+	 */
+	public ActionResponse delete(String vpcId){
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(vpcId), "parameter `vpcId` should not be empty");
+		return deleteWithResponse(uri("/vpcs/%s", vpcId)).execute();
 	}
 
 }

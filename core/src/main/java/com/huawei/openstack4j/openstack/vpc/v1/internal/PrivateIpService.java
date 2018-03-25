@@ -20,32 +20,34 @@ import java.util.Map;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.huawei.openstack4j.openstack.vpc.v1.domain.BandWidth;
-import com.huawei.openstack4j.openstack.vpc.v1.domain.BandWidth.Bandwidths;
-
+import com.huawei.openstack4j.model.common.ActionResponse;
+import com.huawei.openstack4j.openstack.vpc.v1.domain.PrivateIp;
+import com.huawei.openstack4j.openstack.vpc.v1.domain.PrivateIp.Privateips;
 /**
- * The implementation of manipulation of Bandwidth
+ * The implementation of manipulation of Privateip
  * 
  * @author ChangjunZhao
  * @date   2018-03-25
  */
-public class BandWidthService extends BaseVpcServices{
-
+public class PrivateIpService extends BaseVpcServices{
+	
 	/**
-	 * Querying Bandwidths
-	 * @return Bandwidth List
+	 * Querying Private IP Addresses
+	 * @param subnetId
+	 * @return
 	 */
-	public List<? extends BandWidth> list(){
-		return list(null);
+	public List<? extends PrivateIp> list(String subnetId){
+		return list(subnetId,null);
 	}
 	
 	/**
-	 * Querying Bandwidths with filter
+	 * Querying Private IP Addresses with filter
+	 * @param subnetId
 	 * @param filteringParams
 	 * @return
 	 */
-	public List<? extends BandWidth> list(Map<String, String> filteringParams) {
-		Invocation<Bandwidths> flavorInvocation = get(Bandwidths.class, uri("/bandwidths"));
+	public List<? extends PrivateIp> list(String subnetId,Map<String, String> filteringParams) {
+		Invocation<Privateips> flavorInvocation = get(Privateips.class, uri("/subnets/%s/privateips",subnetId));
 		if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
             	flavorInvocation = flavorInvocation.param(entry.getKey(), entry.getValue());
@@ -56,23 +58,33 @@ public class BandWidthService extends BaseVpcServices{
 	}
 	
 	/**
-	 * Querying Bandwidth Details
-	 * @param bandwidthId
-	 * @return Bandwidth
+	 * Applying for Private IP Addresses
+	 * @param privateips
+	 * @return
 	 */
-	public BandWidth get(String bandwidthId){
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(bandwidthId), "parameter `bandwidthId` should not be empty");
-		return get(BandWidth.class, uri("/bandwidths/%s",bandwidthId)).execute();
+	public List<? extends PrivateIp> apply(Privateips privateips){
+		Preconditions.checkNotNull(privateips, "parameter `privateips` should not be null");
+		return post(Privateips.class, uri("/privateips")).entity(privateips).execute().getList();
 	}
 	
 	/**
-	 * Updating Bandwidth
-	 * @param bandwidth
-	 * @return bandwidth
+	 * Querying Elastic IP Address Details
+	 * @param publicipId
+	 * @return
 	 */
-	public BandWidth update(BandWidth bandwidth){
-		Preconditions.checkNotNull(bandwidth, "parameter `bandwidth` should not be null");
-		return put(BandWidth.class, uri("/bandwidths/%s",bandwidth.getId())).entity(bandwidth).execute();
+	public PrivateIp get(String privateipId){
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(privateipId), "parameter `privateipId` should not be empty");
+		return get(PrivateIp.class, uri("/privateips/%s",privateipId)).execute();
+	}
+	
+	/**
+	 * Deleting an Elastic IP Address
+	 * @param publicipId
+	 * @return
+	 */
+	public ActionResponse delete(String privateipId){
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(privateipId), "parameter `privateipId` should not be empty");
+		return deleteWithResponse(uri("/privateips/%s", privateipId)).execute();
 	}
 
 }

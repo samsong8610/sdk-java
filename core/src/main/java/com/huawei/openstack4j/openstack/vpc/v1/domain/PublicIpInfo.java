@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2018 HuaWei and OTC                                       
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -15,38 +15,50 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.vpc.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.huawei.openstack4j.model.ModelEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.huawei.openstack4j.model.ModelEntity;
+/**
+ * Model represent attributes of vpc
+ *
+ * @author ChangjunZhao
+ * @date   2018-03-25
+ */
 @Getter
 @ToString
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("bandwidth")
-public class VirtualBandWidthUpdate implements ModelEntity {
-
+@JsonRootName("publicip_info")
+public class PublicIpInfo implements ModelEntity{
+	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 1、功能说明：带宽名称
-		2、取值范围：1-64，支持数字、字母、中文、_(下划线)、-（中划线）
-		3、约束：
-		如果share_type是PER，该字段是必选。
-		如果bandwidth对象的id有值，该字段被忽略。
+	 * publicip id
 	 */
-	@JsonProperty("name")
-	private String name;
+	@JsonProperty("publicip_id")
+	String publicipId;
+
+	/**
+	 * publicip address
+	 */
+	@JsonProperty("publicip_address")
+	String publicipAddress;
 	
 	/**
-	 * 带宽（Mbit/s），取值范围为[1,300]。
+	 * publicip type
 	 */
-	@JsonProperty("size")
-	private Integer size;
+	@JsonProperty("publicipType")
+	String publicip_type;
+
 }
