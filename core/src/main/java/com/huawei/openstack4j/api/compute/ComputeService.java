@@ -67,6 +67,13 @@ public interface ComputeService extends RestService {
 	 */
 	ServerService servers();
 	
+	
+	/**
+	 * Server V2.1 Service API
+	 *
+	 * @return the server service
+	 */
+	ServerV21Service serversV21();
 
 	/**
 	 * Quota-Set Service API
@@ -138,6 +145,12 @@ public interface ComputeService extends RestService {
 	 * @return ServerTag Service
 	 */
 	ServerTagService serverTags();
+	
+	/**
+	 * Server Tag Management Service V2.1
+	 * @return ServerTag Service V2.1
+	 */
+	ServerTagV21Service serverTagsV21();
 	
     /**
      *  Compute services service

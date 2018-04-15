@@ -40,6 +40,8 @@ import com.huawei.openstack4j.api.compute.QuotaSetService;
 import com.huawei.openstack4j.api.compute.ServerGroupService;
 import com.huawei.openstack4j.api.compute.ServerService;
 import com.huawei.openstack4j.api.compute.ServerTagService;
+import com.huawei.openstack4j.api.compute.ServerTagV21Service;
+import com.huawei.openstack4j.api.compute.ServerV21Service;
 import com.huawei.openstack4j.api.compute.ext.FloatingIPDNSDomainService;
 import com.huawei.openstack4j.api.compute.ext.FloatingIPDNSEntryService;
 import com.huawei.openstack4j.api.compute.ext.FloatingIPDNSService;
@@ -248,6 +250,8 @@ import com.huawei.openstack4j.openstack.compute.internal.ext.InstanceActionsServ
 import com.huawei.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import com.huawei.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import com.huawei.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
+import com.huawei.openstack4j.openstack.compute.v21.internal.ServerTagV21ServiceImpl;
+import com.huawei.openstack4j.openstack.compute.v21.internal.ServerV21ServiceImpl;
 import com.huawei.openstack4j.openstack.database.internal.DatabaseBackupService;
 import com.huawei.openstack4j.openstack.database.internal.DatabaseInstanceFlavorService;
 import com.huawei.openstack4j.openstack.database.internal.DatabaseInstanceService;
@@ -496,6 +500,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(com.huawei.openstack4j.openstack.ecs.v1_1.internal.CloudServerService.class, com.huawei.openstack4j.openstack.ecs.v1_1.internal.CloudServerService.class);
 		bind(com.huawei.openstack4j.openstack.evs.v2.internal.VolumeService.class, com.huawei.openstack4j.openstack.evs.v2.internal.VolumeService.class);
 		bind(com.huawei.openstack4j.openstack.evs.v2_1.internal.VolumeService.class, com.huawei.openstack4j.openstack.evs.v2_1.internal.VolumeService.class);
+		bind(ServerV21Service.class, ServerV21ServiceImpl.class);
 		bind(QuotaSetService.class, QuotaSetServiceImpl.class);
 		bind(HostService.class, HostServiceImpl.class);
 		bind(NetworkingService.class, NetworkingServiceImpl.class);
@@ -662,6 +667,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(TaskService.class, TaskServiceImpl.class);
 		bind(TaskService.class, TaskServiceImpl.class);
 		bind(ServerTagService.class, ServerTagServiceImpl.class);
+		bind(ServerTagV21Service.class, ServerTagV21ServiceImpl.class);
 		bind(TelemetryAodhService.class, TelemetryAodhServiceImpl.class);
 		bind(AlarmAodhService.class, AlarmAodhServiceImpl.class);
 		bind(ServicesService.class, ServicesServiceImpl.class);
