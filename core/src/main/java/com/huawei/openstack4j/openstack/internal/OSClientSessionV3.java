@@ -1,6 +1,5 @@
 /*******************************************************************************
- *  Copyright 2018 Huawei Technologies Co., Ltd.
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2016 ContainX and OpenStack4j
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,6 +12,21 @@
  * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
+ * 	      Huawei has modified this source file.
+ *
+ *             Copyright 2018 Huawei Technologies Co., Ltd.
+ *
+ *             Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *             use this file except in compliance with the License. You may obtain a copy of
+ *             the License at
+ *
+ *                  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *             Unless required by applicable law or agreed to in writing, software
+ *             distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *             WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *             License for the specific language governing permissions and limitations under
+ *             the License.
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.internal;
 
@@ -53,7 +67,7 @@ import com.huawei.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 import com.huawei.openstack4j.openstack.maas.internal.MaaSService;
 import com.huawei.openstack4j.openstack.message.notification.internal.NotificationService;
 import com.huawei.openstack4j.openstack.message.queue.internal.MessageQueueService;
-import com.huawei.openstack4j.openstack.vpc.v1.internal.VpcServices;
+import com.huawei.openstack4j.openstack.vpc.v2.internal.VirtualPrivateCloudService;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -346,7 +360,19 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 		return Apis.get(CdnServices.class);
 	}
 	
-	public VpcServices vpc() {
-		return Apis.get(VpcServices.class);
-	}
+	/**
+	  * 
+	  * @return
+	  */
+	 public VirtualPrivateCloudService vpcV2(){
+		 return Apis.get(VirtualPrivateCloudService.class);
+	 }
+	 
+	 /**
+	  * Returns the VirtualPrivateCloud Service API
+	  * @return the VirtualPrivateCloudService
+	  */
+	 public com.huawei.openstack4j.openstack.vpc.v1.internal.VirtualPrivateCloudService vpc(){
+		 return Apis.get(com.huawei.openstack4j.openstack.vpc.v1.internal.VirtualPrivateCloudService.class);
+	 }
 }

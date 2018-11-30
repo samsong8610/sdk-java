@@ -1,9 +1,8 @@
 /*******************************************************************************
- *  Copyright 2018 Huawei Technologies Co., Ltd.
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
- * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
- * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	Copyright 2016 ContainX and OpenStack4j
+ *
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * 	use this file except in compliance with the License. You may obtain a copy of
  * 	the License at                                                                   
  * 	                                                                                 
  * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
@@ -13,6 +12,21 @@
  * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
+ * 	      Huawei has modified this source file.
+ *
+ *             Copyright 2018 Huawei Technologies Co., Ltd.
+ *
+ *             Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *             use this file except in compliance with the License. You may obtain a copy of
+ *             the License at
+ *
+ *                  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *             Unless required by applicable law or agreed to in writing, software
+ *             distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *             WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *             License for the specific language governing permissions and limitations under
+ *             the License.
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.provider;
 
@@ -431,12 +445,6 @@ import com.huawei.openstack4j.openstack.trove.internal.TroveDatabaseParamService
 import com.huawei.openstack4j.openstack.trove.internal.TroveInstanceFlavorService;
 import com.huawei.openstack4j.openstack.trove.internal.TroveService;
 import com.huawei.openstack4j.openstack.trove.internal.TroveVersionService;
-import com.huawei.openstack4j.openstack.vpc.v1.internal.PrivateIpService;
-import com.huawei.openstack4j.openstack.vpc.v1.internal.VpcService;
-import com.huawei.openstack4j.openstack.vpc.v1.internal.VpcServices;
-import com.huawei.openstack4j.openstack.vpc.v2.internal.BandWidthService;
-import com.huawei.openstack4j.openstack.vpc.v2.internal.PublicIpService;
-import com.huawei.openstack4j.openstack.vpc.v2.internal.VirtualPrivateCloudService;
 import com.huawei.openstack4j.openstack.workflow.internal.ActionDefinitionServiceImpl;
 import com.huawei.openstack4j.openstack.workflow.internal.WorkbookDefinitionServiceImpl;
 import com.huawei.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
@@ -485,11 +493,6 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ServerService.class, ServerServiceImpl.class);
 		// new ecs v1
 		bind(ElasticComputeService.class, ElasticComputeService.class);
-		bind(VirtualPrivateCloudService.class, VirtualPrivateCloudService.class);
-		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.PublicIpService.class, com.huawei.openstack4j.openstack.vpc.v1.internal.PublicIpService.class);
-		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.BandWidthService.class, com.huawei.openstack4j.openstack.vpc.v1.internal.BandWidthService.class);
-		bind(PublicIpService.class, PublicIpService.class);
-		bind(BandWidthService.class, BandWidthService.class);
 		bind(com.huawei.openstack4j.openstack.ecs.v1.internal.JobService.class, com.huawei.openstack4j.openstack.ecs.v1.internal.JobService.class);
 		bind(com.huawei.openstack4j.openstack.ecs.v1_1.internal.ElasticComputeService.class, com.huawei.openstack4j.openstack.ecs.v1_1.internal.ElasticComputeService.class);
 		bind(com.huawei.openstack4j.openstack.evs.v2.internal.ElasticVolumeService.class, com.huawei.openstack4j.openstack.evs.v2.internal.ElasticVolumeService.class);
@@ -755,16 +758,21 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(com.huawei.openstack4j.openstack.maas.internal.TaskService.class,
 				com.huawei.openstack4j.openstack.maas.internal.TaskService.class);
 		
-		// vpc
-		bind(VpcService.class, VpcService.class);
-		bind(VpcServices.class,VpcServices.class);
+		// vpc v1
+		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.VpcService.class, com.huawei.openstack4j.openstack.vpc.v1.internal.VpcService.class);
+		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.VirtualPrivateCloudService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.VirtualPrivateCloudService.class);
 		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.SubnetService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.SubnetService.class);
-		bind(PublicIpService.class,PublicIpService.class);
-		bind(BandWidthService.class,BandWidthService.class);
+		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.PublicIpService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.PublicIpService.class);
+		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.BandWidthService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.BandWidthService.class);
 		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.QuotaService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.QuotaService.class);
-		bind(PrivateIpService.class,PrivateIpService.class);
+		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.PrivateIpService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.PrivateIpService.class);
 		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.SecurityGroupService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.SecurityGroupService.class);
 		bind(com.huawei.openstack4j.openstack.vpc.v1.internal.PortService.class,com.huawei.openstack4j.openstack.vpc.v1.internal.PortService.class);
+		
+		// vpc v2
+		bind(com.huawei.openstack4j.openstack.vpc.v2.internal.VirtualPrivateCloudService.class, com.huawei.openstack4j.openstack.vpc.v2.internal.VirtualPrivateCloudService.class);
+		bind(com.huawei.openstack4j.openstack.vpc.v2.internal.PublicIpService.class, com.huawei.openstack4j.openstack.vpc.v2.internal.PublicIpService.class);
+		bind(com.huawei.openstack4j.openstack.vpc.v2.internal.BandWidthService.class, com.huawei.openstack4j.openstack.vpc.v2.internal.BandWidthService.class);
 
 		//cdn
 		bind(CdnServices.class,CdnServices.class);
